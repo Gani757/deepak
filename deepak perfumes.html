@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deepak Perfumes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4E6E1; --surface:#EAD2CB; --ink:#211A2E; --muted:#66566A; --amber:#9A5A10;
+  --line:rgba(33,26,46,.2); --btn-bg:#211A2E; --btn-ink:#F4E6E1;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15172A; --surface:#1F2242; --ink:#F3E6D8; --muted:#ABA5BC; --amber:#F0B44C;
+    --line:rgba(243,230,216,.18); --btn-bg:#F0B44C; --btn-ink:#15172A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15172A; --surface:#1F2242; --ink:#F3E6D8; --muted:#ABA5BC; --amber:#F0B44C;
+  --line:rgba(243,230,216,.18); --btn-bg:#F0B44C; --btn-ink:#15172A;
+}
+.night{
+  --bg:#15172A; --surface:#1F2242; --ink:#F3E6D8; --muted:#ABA5BC; --amber:#F0B44C;
+  --line:rgba(243,230,216,.18); --btn-bg:#F0B44C; --btn-ink:#15172A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0}
+.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-ink);border:0;padding:14px 26px;font:600 15px var(--body);cursor:pointer;text-decoration:none;border-radius:2px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--display);font-size:26px;letter-spacing:.04em;text-decoration:none}
+nav{display:flex;gap:28px;align-items:center}
+nav a{text-decoration:none;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.bag-btn{background:none;border:0;color:var(--ink);font:500 15px var(--body);cursor:pointer;padding:8px 0}
+@media (max-width:640px){nav a.hide-sm{display:none}}
+
+/* hero */
+.hero{background:var(--bg);color:var(--ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:min(84vh,760px);padding-top:56px;padding-bottom:56px}
+.hero h1{font-size:clamp(40px,6.2vw,84px);letter-spacing:-.01em}
+.hero p{max-width:46ch;color:var(--muted);margin:24px 0 32px;font-size:18px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+.stage{position:relative;display:grid;place-items:center;aspect-ratio:1/1.1}
+.glow{position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle at 50% 55%,rgba(240,180,76,.55),rgba(240,180,76,.16) 45%,transparent 70%);filter:blur(6px);animation:kindle 2.4s ease-out both, breathe 6s ease-in-out 2.4s infinite}
+.stage svg{position:relative;width:min(300px,68%);height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35));animation:rise 1.4s ease-out both}
+@keyframes kindle{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes breathe{50%{transform:scale(1.06);opacity:.85}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr;min-height:0}.stage{order:-1;max-width:360px;margin:0 auto;width:100%}}
+
+/* collection */
+section{padding:88px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.head h2{font-size:clamp(32px,4.4vw,52px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:none;border:1px solid var(--line);color:var(--ink);padding:8px 16px;font:500 14px var(--body);cursor:pointer;border-radius:999px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:36px 28px}
+.tile{position:relative;overflow:hidden;background:var(--surface);aspect-ratio:1/1.05;display:grid;place-items:center;margin-bottom:18px}
+.tile .motif{position:absolute;inset:0;width:100%;height:100%}
+.tile .bt{position:relative;width:38%;height:auto;filter:drop-shadow(0 14px 16px rgba(0,0,0,.28))}
+.stage svg.arch{position:absolute;inset:0;width:100%;height:100%;filter:none;animation:none}
+.ings{background:var(--bg)}
+.ing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.ing svg{display:block;width:100%;height:auto;border-radius:50%;margin-bottom:16px}
+.ing h3{font-size:22px}
+.ing p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.scene{display:block;width:100%;height:auto;border-radius:4px;margin-bottom:32px}
+@media (max-width:820px){.ing-grid{grid-template-columns:repeat(2,1fr)}}
+/* story */
+.prod h3{font-size:26px}
+.family{color:var(--amber);font-size:14px;font-weight:600;margin:4px 0 8px}
+.notes{color:var(--muted);font-size:15px;margin:0 0 16px}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sizes{display:flex;gap:6px}
+.sz{background:none;border:1px solid var(--line);color:var(--ink);padding:6px 11px;font:500 13px var(--body);cursor:pointer;border-radius:2px}
+.sz[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.price{font-family:var(--display);font-size:24px}
+.prod .btn{width:100%;margin-top:14px;padding:12px}
+
+/* story */
+.story{background:var(--surface)}
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.story h2{font-size:clamp(32px,4.4vw,54px)}
+.story p{color:var(--muted);margin:0 0 18px;max-width:52ch}
+.facts{display:grid;gap:22px;margin-top:8px}
+.fact{border-left:2px solid var(--amber);padding-left:18px}
+.fact h3{font-size:22px;margin-bottom:4px}
+.fact p{margin:0;font-size:16px}
+@media (max-width:820px){.story .wrap{grid-template-columns:1fr;gap:36px}}
+
+/* order */
+.order{text-align:center}
+.order h2{font-size:clamp(32px,4.4vw,54px);margin-bottom:16px}
+.order p{color:var(--muted);max-width:48ch;margin:0 auto 28px}
+.order .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+footer{background:var(--bg);color:var(--ink);border-top:1px solid var(--line);padding:36px 0 48px;font-size:15px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,10,20,.55);opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);z-index:31;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 20px) 22px calc(env(safe-area-inset-bottom,0px) + 20px)}
+.drawer.on{transform:none}
+.drawer header{position:static;display:flex;justify-content:space-between;align-items:center;border:0;height:auto;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.drawer h2{font-size:28px}
+.x{background:none;border:0;color:var(--ink);font-size:26px;cursor:pointer;line-height:1}
+.items{flex:1;overflow:auto;padding:8px 0}
+.line{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.line b{font-weight:600}
+.line small{color:var(--muted);grid-column:1}
+.qty{display:flex;align-items:center;gap:10px;grid-column:1}
+.qty button{width:28px;height:28px;background:none;border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:2px}
+.empty{color:var(--muted);padding:32px 0}
+.total{display:flex;justify-content:space-between;font-family:var(--display);font-size:26px;padding:16px 0}
+.drawer .btn{width:100%;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 18px;font-size:14px;opacity:0;transition:.25s;z-index:40;border-radius:2px;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Deepak</a>
+    <nav>
+      <a class="hide-sm" href="#collection">Collection</a>
+      <a class="hide-sm" href="#ingredients">Ingredients</a>
+      <a class="hide-sm" href="#story">Our story</a>
+      <a class="hide-sm" href="#order">Order</a>
+      <button class="bag-btn" id="openBag" aria-label="Open bag">Bag (<span id="count">0</span>)</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero night">
+    <div class="wrap">
+      <div>
+        <h1>Deepak means lamp. Our perfumes burn just as slowly.</h1>
+        <p>Small-batch fragrances built on saffron, rose, oud and sandal. Light on the first spray, warm for hours after.</p>
+        <div class="actions">
+          <a class="btn" href="#collection">Shop the collection</a>
+          <a class="btn ghost" href="#story">Read our story</a>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <svg class="arch" viewBox="0 0 400 440" fill="none">
+          <path d="M60 430V190C60 100 120 40 200 20C280 40 340 100 340 190V430" stroke="#F0B44C" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M84 430V196C84 116 136 62 200 44C264 62 316 116 316 196V430" stroke="#F0B44C" stroke-opacity=".3" stroke-width="1"/>
+          <circle cx="200" cy="20" r="5" fill="#F0B44C" fill-opacity=".8"/>
+          <g fill="#F3E6D8" fill-opacity=".7"><circle cx="40" cy="60" r="2"/><circle cx="360" cy="90" r="2.5"/><circle cx="20" cy="220" r="1.8"/><circle cx="382" cy="250" r="2"/><circle cx="120" cy="20" r="1.5"/><circle cx="300" cy="14" r="1.8"/></g>
+          <g fill="#C9506B" fill-opacity=".55"><ellipse cx="78" cy="330" rx="7" ry="12" transform="rotate(35 78 330)"/><ellipse cx="330" cy="360" rx="6" ry="11" transform="rotate(-30 330 360)"/><ellipse cx="300" cy="150" rx="5" ry="9" transform="rotate(50 300 150)"/></g>
+        </svg>
+        <div class="glow"></div>
+        <div id="heroBottle"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="collection">
+    <div class="wrap">
+      <div class="head">
+        <h2>The collection</h2>
+        <div class="chips" id="chips" role="group" aria-label="Filter by scent family"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="ings" id="ingredients">
+    <div class="wrap">
+      <div class="head"><h2>What goes into the bottle</h2></div>
+      <div class="ing-grid" id="ingGrid"></div>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="wrap">
+      <div>
+        <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Illustration of a lit diya in front of an arched Hyderabad monument at night">
+          <defs><radialGradient id="sg"><stop offset="0" stop-color="#F0B44C" stop-opacity=".55"/><stop offset="1" stop-color="#F0B44C" stop-opacity="0"/></radialGradient></defs>
+          <rect width="600" height="340" fill="#15172A"/>
+          <g fill="#F3E6D8"><circle cx="60" cy="50" r="1.6"/><circle cx="130" cy="110" r="1.2"/><circle cx="90" cy="180" r="1.4"/><circle cx="520" cy="130" r="1.5"/><circle cx="560" cy="200" r="1.2"/><circle cx="430" cy="40" r="1.4"/><circle cx="170" cy="30" r="1.2"/></g>
+          <circle cx="500" cy="64" r="20" fill="#F3E6D8" fill-opacity=".9"/><circle cx="510" cy="58" r="18" fill="#15172A"/>
+          <g fill="#262B57">
+            <rect x="204" y="70" width="16" height="220"/><rect x="380" y="70" width="16" height="220"/>
+            <path d="M200 70Q212 36 224 70Z"/><path d="M376 70Q388 36 400 70Z"/>
+            <rect x="196" y="120" width="32" height="6"/><rect x="372" y="120" width="32" height="6"/>
+            <rect x="228" y="150" width="144" height="140"/>
+            <rect x="240" y="112" width="120" height="42"/>
+            <ellipse cx="262" cy="112" rx="11" ry="14"/><ellipse cx="300" cy="106" rx="13" ry="18"/><ellipse cx="338" cy="112" rx="11" ry="14"/>
+          </g>
+          <path d="M266 290V222Q300 176 334 222V290Z" fill="#15172A"/>
+          <g fill="#F0B44C" fill-opacity=".55"><path d="M254 152v-14q6-9 12 0v14z"/><path d="M294 152v-14q6-9 12 0v14z"/><path d="M334 152v-14q6-9 12 0v14z"/></g>
+          <rect y="290" width="600" height="50" fill="#0E1024"/>
+          <circle cx="300" cy="290" r="90" fill="url(#sg)"/>
+          <path d="M262 296Q300 338 338 296Z" fill="#C99A45"/><path d="M262 296H338" stroke="#E6BF6E" stroke-width="3"/>
+          <path d="M300 250Q283 276 300 294Q317 276 300 250Z" fill="#F0B44C"/><path d="M300 268Q292 282 300 292Q308 282 300 268Z" fill="#FFF1C9"/>
+        </svg>
+        <h2>A flame that doesn't rush.</h2>
+        <p>A diya is small, steady and lights a whole room. That is how we wanted our perfumes to behave: close to the skin at first, then opening slowly through the day.</p>
+        <p>Every Deepak fragrance starts from the attar traditions of Hyderabad and is finished as a modern eau de parfum you can wear to work, to a wedding, or to nothing at all.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><h3>Poured in small batches</h3><p>Each batch is blended, rested and bottled by hand before it ships.</p></div>
+        <div class="fact"><h3>Built to last</h3><p>High oil concentration, so a few sprays stay with you from morning to night.</p></div>
+        <div class="fact"><h3>Try before you commit</h3><p>Every scent is available in a 30 ml size, so you can wear it for a week first.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <div class="wrap">
+      <h2>Order on WhatsApp</h2>
+      <p>Fill your bag and send it to us in one tap. We confirm stock, delivery and payment on chat.</p>
+      <div class="actions">
+        <button class="btn" id="openBag2">View my bag</button>
+        <a class="btn ghost" id="waDirect" href="#" target="_blank" rel="noopener">Ask about a scent</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Deepak Perfumes, Hyderabad</span>
+    <span>&copy; 2026 Deepak. All rights reserved.</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag" aria-hidden="true">
+  <header><h2>Your bag</h2><button class="x" id="closeBag" aria-label="Close bag">&times;</button></header>
+  <div class="items" id="items"></div>
+  <div class="total"><span>Total</span><span id="total">&#8377;0</span></div>
+  <a class="btn" id="checkout" href="#" target="_blank" rel="noopener">Send order on WhatsApp</a>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// ====== EDIT THESE ======
+const WHATSAPP_NUMBER = "919999999999"; // country code + number, no + or spaces
+const BRAND = "Deepak";
+// ========================
+
+const PRODUCTS = [
+  {id:"oud-diya",  name:"Oud Diya",      family:"Woody",  base:3499, notes:"Oud, incense, amber",            color:"#B5541F"},
+  {id:"noor",      name:"Noor",          family:"Floral", base:2999, notes:"Damask rose, saffron, musk",     color:"#C9506B"},
+  {id:"mogra",     name:"Mogra Midnight",family:"Floral", base:2799, notes:"Jasmine sambac, tuberose, musk", color:"#D9B7C9"},
+  {id:"khus",      name:"Khus Monsoon",  family:"Fresh",  base:2499, notes:"Vetiver, wet earth, green tea",  color:"#5E9C7E"},
+  {id:"kesar",     name:"Kesar Rani",    family:"Spiced", base:3199, notes:"Saffron, cardamom, vanilla",     color:"#E3A32B"},
+  {id:"charminar", name:"Charminar Dusk",family:"Woody",  base:2899, notes:"Sandalwood, amber, dry fruit",   color:"#9A6A3C"}
+];
+const SIZES = [{ml:30,m:.6},{ml:50,m:1},{ml:100,m:1.8}];
+const fmt = n => "\u20B9" + Math.round(n).toLocaleString("en-IN");
+const priceFor = (p,ml) => Math.round(p.base * SIZES.find(s=>s.ml===ml).m / 10) * 10;
+
+function bottle(color,id){
+  const g="g"+id;
+  return `<svg class="bt" viewBox="0 0 120 200" role="img" aria-label="Perfume bottle">
+    <defs>
+      <linearGradient id="${g}" x1="0" x2="1"><stop offset="0" stop-color="${color}" stop-opacity=".95"/><stop offset="1" stop-color="${color}" stop-opacity=".65"/></linearGradient>
+    </defs>
+    <rect x="46" y="8" width="28" height="34" rx="3" fill="#C99A45"/>
+    <rect x="46" y="8" width="28" height="6" rx="3" fill="#E6BF6E"/>
+    <rect x="52" y="42" width="16" height="14" fill="#E9E2D6" opacity=".9"/>
+    <rect x="14" y="56" width="92" height="136" rx="10" fill="#F3EDE3" opacity=".22" stroke="#F3EDE3" stroke-opacity=".55"/>
+    <rect x="19" y="82" width="82" height="105" rx="6" fill="url(#${g})"/>
+    <rect x="30" y="104" width="60" height="58" rx="2" fill="#F6EFE3" opacity=".92"/>
+    <text x="60" y="140" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#211A2E">D</text>
+    <text x="60" y="154" text-anchor="middle" font-family="Georgia,serif" font-size="6.5" letter-spacing="1.5" fill="#211A2E">DEEPAK</text>
+    <rect x="24" y="86" width="7" height="96" rx="3.5" fill="#fff" opacity=".22"/>
+  </svg>`;
+}
+
+document.getElementById("heroBottle").innerHTML = bottle("#E3A32B","hero");
+
+/* ---------- illustrations ---------- */
+function flower(cx,cy,r,n,c,o,cc){
+  let t="";
+  for(let i=0;i<n;i++){
+    t+=`<ellipse cx="${cx}" cy="${cy-r*0.55}" rx="${r*0.32}" ry="${r*0.6}" transform="rotate(${i*360/n} ${cx} ${cy})" fill="${c}" opacity="${o}"/>`;
+  }
+  return t+`<circle cx="${cx}" cy="${cy}" r="${r*0.16}" fill="${cc||c}" opacity="${Math.min(1,o+.3)}"/>`;
+}
+function motif(id,c){
+  let g="";
+  if(id==="noor"){
+    g=flower(38,46,36,9,c,.32)+flower(38,46,22,7,c,.4)+flower(166,172,42,9,c,.3)+flower(166,172,26,7,c,.4)
+     +`<ellipse cx="86" cy="24" rx="6" ry="14" transform="rotate(50 86 24)" fill="${c}" opacity=".3"/><ellipse cx="18" cy="120" rx="6" ry="14" transform="rotate(-20 18 120)" fill="${c}" opacity=".3"/>`;
+  } else if(id==="mogra"){
+    g=flower(46,50,28,5,c,.7,"#E9C46A")+flower(158,58,20,5,c,.7,"#E9C46A")+flower(150,166,32,5,c,.7,"#E9C46A")+flower(34,160,18,5,c,.7,"#E9C46A")
+     +`<ellipse cx="96" cy="20" rx="8" ry="18" transform="rotate(-60 96 20)" fill="#5E9C7E" opacity=".35"/><ellipse cx="100" cy="196" rx="8" ry="18" transform="rotate(70 100 196)" fill="#5E9C7E" opacity=".35"/>`;
+  } else if(id==="khus"){
+    for(let i=0;i<15;i++){
+      const x=8+i*13, top=70+((i*37)%60), lean=((i%3)-1)*14;
+      g+=`<path d="M${x} 212Q${x+10} 150 ${x+lean} ${top}" stroke="${c}" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="${.35+(i%4)*.08}"/>`;
+    }
+    g+=`<g fill="${c}" opacity=".45"><circle cx="30" cy="30" r="3"/><circle cx="70" cy="14" r="2.4"/><circle cx="150" cy="26" r="3"/><circle cx="182" cy="52" r="2.4"/><circle cx="118" cy="46" r="2"/></g>`;
+  } else if(id==="kesar"){
+    g=flower(160,48,30,6,"#8E6BB5",.4,c);
+    for(let i=0;i<7;i++){
+      const x=20+i*22;
+      g+=`<path d="M${x} 212Q${x+14} 160 ${x+(i%2?24:-6)} ${118+(i*9)%30}" stroke="${c}" stroke-width="2.6" stroke-linecap="round" fill="none" opacity=".7"/><circle cx="${x+(i%2?24:-6)}" cy="${118+(i*9)%30}" r="3.4" fill="#D4341C" opacity=".8"/>`;
+    }
+  } else if(id==="oud-diya"){
+    for(let r=44;r>0;r-=8){g+=`<circle cx="158" cy="168" r="${r}" fill="none" stroke="${c}" stroke-width="2.4" opacity="${.25+r/120}"/>`;}
+    g+=`<circle cx="158" cy="168" r="3" fill="${c}"/>`
+      +`<path d="M40 190Q20 160 44 138Q66 116 40 90Q20 66 46 42" stroke="${c}" stroke-width="2.4" fill="none" opacity=".4" stroke-linecap="round"/>`
+      +`<path d="M64 196Q44 168 66 146Q86 126 66 102" stroke="${c}" stroke-width="2" fill="none" opacity=".3" stroke-linecap="round"/>`;
+  } else { /* charminar */
+    g=`<g fill="${c}" opacity=".38"><rect x="24" y="80" width="12" height="130"/><rect x="164" y="80" width="12" height="130"/><path d="M21 80Q30 54 39 80Z"/><path d="M161 80Q170 54 179 80Z"/><rect x="44" y="126" width="112" height="84"/><rect x="52" y="104" width="96" height="26"/><ellipse cx="70" cy="104" rx="8" ry="11"/><ellipse cx="100" cy="98" rx="10" ry="14"/><ellipse cx="130" cy="104" rx="8" ry="11"/></g><path d="M84 210V162Q100 140 116 162V210Z" fill="var(--surface)"/>`;
+  }
+  return `<svg class="motif" viewBox="0 0 200 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${g}</svg>`;
+}
+
+const INGREDIENTS = [
+  {name:"Damask rose", note:"The soft, petal-sweet heart of Noor.", svg:
+    `<rect width="200" height="200" fill="#3B1626"/>`+flower(100,100,84,12,"#B03A5B",.9)+flower(100,100,60,10,"#D9647F",.95)+flower(100,100,38,8,"#F0A0B3",1,"#7A1F3C")},
+  {name:"Jasmine sambac", note:"Night-blooming white flowers in Mogra Midnight.", svg:
+    `<rect width="200" height="200" fill="#1E3A2F"/><g fill="#2F6B4F"><ellipse cx="100" cy="30" rx="16" ry="34"/><ellipse cx="100" cy="170" rx="16" ry="34"/><ellipse cx="30" cy="100" rx="34" ry="16"/><ellipse cx="170" cy="100" rx="34" ry="16"/></g>`+flower(100,100,66,5,"#F7F0F4",1,"#E9C46A")},
+  {name:"Saffron threads", note:"Warm golden spice that lights up Kesar Rani.", svg:
+    `<rect width="200" height="200" fill="#2B1E4A"/>`+flower(100,112,74,6,"#8E6BB5",1,"#F0B44C")
+    +`<g stroke="#D4341C" stroke-width="5" stroke-linecap="round" fill="none"><path d="M100 112Q80 70 62 46"/><path d="M100 112Q104 66 112 34"/><path d="M100 112Q126 76 148 54"/></g>`},
+  {name:"Aged oud", note:"Deep, resinous wood at the base of Oud Diya.", svg:
+    `<rect width="200" height="200" fill="#2E1B12"/>`+[86,72,58,44,30,16].map((r,i)=>`<circle cx="100" cy="100" r="${r}" fill="${i%2?"#4A2C1B":"#6B4128"}" stroke="#B5714A" stroke-width="2" stroke-opacity=".7"/>`).join("")
+    +`<path d="M100 100L168 62M100 100L44 152M100 100L150 160" stroke="#2E1B12" stroke-width="2.4" stroke-linecap="round"/>`}
+];
+document.getElementById("ingGrid").innerHTML = INGREDIENTS.map(i=>`
+  <div class="ing"><svg viewBox="0 0 200 200" role="img" aria-label="${i.name} illustration">${i.svg}</svg><h3>${i.name}</h3><p>${i.note}</p></div>`).join("");
+
+/* ---------- collection ---------- */
+const families = ["All",...new Set(PRODUCTS.map(p=>p.family))];
+let filter = "All";
+const sel = {}; // chosen size per product
+PRODUCTS.forEach(p=>sel[p.id]=50);
+
+function renderChips(){
+  const el = document.getElementById("chips");
+  el.innerHTML = families.map(f=>`<button class="chip" data-f="${f}" aria-pressed="${f===filter}">${f}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderChips();renderGrid();});
+}
+function renderGrid(){
+  const list = PRODUCTS.filter(p=>filter==="All"||p.family===filter);
+  const el = document.getElementById("grid");
+  el.innerHTML = list.map(p=>`
+    <article class="prod">
+      <div class="tile">${motif(p.id,p.color)}${bottle(p.color,p.id)}</div>
+      <h3>${p.name}</h3>
+      <div class="family">${p.family}</div>
+      <p class="notes">${p.notes}</p>
+      <div class="buy">
+        <div class="sizes" role="group" aria-label="Size for ${p.name}">
+          ${SIZES.map(s=>`<button class="sz" data-id="${p.id}" data-ml="${s.ml}" aria-pressed="${sel[p.id]===s.ml}">${s.ml} ml</button>`).join("")}
+        </div>
+        <span class="price" id="pr-${p.id}">${fmt(priceFor(p,sel[p.id]))}</span>
+      </div>
+      <button class="btn add" data-id="${p.id}">Add to bag</button>
+    </article>`).join("");
+  el.querySelectorAll(".sz").forEach(b=>b.onclick=()=>{
+    sel[b.dataset.id]=+b.dataset.ml;
+    const p = PRODUCTS.find(x=>x.id===b.dataset.id);
+    b.parentElement.querySelectorAll(".sz").forEach(o=>o.setAttribute("aria-pressed",o===b));
+    document.getElementById("pr-"+p.id).textContent = fmt(priceFor(p,sel[p.id]));
+  });
+  el.querySelectorAll(".add").forEach(b=>b.onclick=()=>addToBag(b.dataset.id));
+}
+
+/* ---------- bag ---------- */
+let bag = [];
+try{ bag = JSON.parse(localStorage.getItem("deepak-bag")||"[]"); }catch(e){ bag = []; }
+const save = () => { try{ localStorage.setItem("deepak-bag",JSON.stringify(bag)); }catch(e){} };
+
+function addToBag(id){
+  const ml = sel[id];
+  const hit = bag.find(i=>i.id===id && i.ml===ml);
+  if(hit) hit.qty++; else bag.push({id,ml,qty:1});
+  save(); renderBag();
+  const p = PRODUCTS.find(x=>x.id===id);
+  toast(`${p.name} ${ml} ml added to bag`);
+}
+function change(idx,d){
+  bag[idx].qty += d;
+  if(bag[idx].qty<=0) bag.splice(idx,1);
+  save(); renderBag();
+}
+function renderBag(){
+  const items = document.getElementById("items");
+  let total = 0, count = 0, lines = [];
+  if(!bag.length){
+    items.innerHTML = `<p class="empty">Your bag is empty. Pick a scent from the collection.</p>`;
+  } else {
+    items.innerHTML = bag.map((i,idx)=>{
+      const p = PRODUCTS.find(x=>x.id===i.id);
+      const sub = priceFor(p,i.ml)*i.qty;
+      total += sub; count += i.qty;
+      lines.push(`${i.qty} x ${p.name} (${i.ml} ml) - ${fmt(sub)}`);
+      return `<div class="line">
+        <b>${p.name}</b><span>${fmt(sub)}</span>
+        <small>${i.ml} ml, ${fmt(priceFor(p,i.ml))} each</small><span></span>
+        <div class="qty"><button data-i="${idx}" data-d="-1" aria-label="Remove one">&minus;</button><span>${i.qty}</span><button data-i="${idx}" data-d="1" aria-label="Add one">+</button></div>
+      </div>`;
+    }).join("");
+    items.querySelectorAll(".qty button").forEach(b=>b.onclick=()=>change(+b.dataset.i,+b.dataset.d));
+  }
+  document.getElementById("count").textContent = count;
+  document.getElementById("total").textContent = fmt(total);
+  const msg = bag.length
+    ? `Hello ${BRAND}, I would like to order:\n${lines.join("\n")}\nTotal: ${fmt(total)}`
+    : `Hello ${BRAND}, I would like to know more about your perfumes.`;
+  document.getElementById("checkout").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  document.getElementById("waDirect").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello "+BRAND+", I have a question about a scent.")}`;
+}
+
+/* ---------- drawer + toast ---------- */
+const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
+function openBag(){drawer.classList.add("on");scrim.classList.add("on");drawer.setAttribute("aria-hidden","false");document.getElementById("closeBag").focus();}
+function closeBag(){drawer.classList.remove("on");scrim.classList.remove("on");drawer.setAttribute("aria-hidden","true");}
+document.getElementById("openBag").onclick = openBag;
+document.getElementById("openBag2").onclick = openBag;
+document.getElementById("closeBag").onclick = closeBag;
+scrim.onclick = closeBag;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeBag();});
+let tt;
+function toast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("on"),1800);}
+
+renderChips(); renderGrid(); renderBag();
+</script>
+</body>
+</html>
